@@ -53,7 +53,7 @@ class SqlHelper {
           description text not null,
           price double not null,
           stock integer not null,
-          isAvaliable boolean not null,
+          isAvailable boolean not null,
           image text,
           categoryId integer not null,
           foreign key(categoryId) references categories(id)

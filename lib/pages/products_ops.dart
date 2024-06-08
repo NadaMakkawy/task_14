@@ -26,7 +26,8 @@ class _ProductOpsPageState extends State<ProductOpsPage> {
   TextEditingController? priceController;
   TextEditingController? stockController;
   TextEditingController? imageController;
-  bool isAvaliable = false;
+  bool isAvailable = false;
+
   int? selectedCategoryId;
 
   @override
@@ -48,7 +49,7 @@ class _ProductOpsPageState extends State<ProductOpsPage> {
     stockController =
         TextEditingController(text: '${widget.product?.stock ?? ''}');
 
-    isAvaliable = widget.product?.isAvaliable ?? false;
+    isAvailable = widget.product?.isAvailable ?? false;
     selectedCategoryId = widget.product?.categoryId;
     setState(() {});
   }
@@ -62,130 +63,133 @@ class _ProductOpsPageState extends State<ProductOpsPage> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
-            key: formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  AppTextFormField(
-                    controller: nameController!,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Name is required';
-                      }
-                      return null;
-                    },
-                    label: 'Name',
-                    hint: 'Product Name',
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AppTextFormField(
-                    controller: descriptionController!,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Description is required';
-                      }
-                      return null;
-                    },
-                    label: 'Description',
-                    hint: 'Product Description',
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: AppTextFormField(
-                          controller: priceController!,
-                          textInputType: TextInputType.number,
-                          formatters: [FilteringTextInputFormatter.digitsOnly],
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Price is required';
-                            }
-                            return null;
-                          },
-                          label: 'Price',
-                          hint: '99.0',
-                        ),
+          key: formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AppTextFormField(
+                  controller: nameController!,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Name is required';
+                    }
+                    return null;
+                  },
+                  label: 'Name',
+                  hint: 'Product Name',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                AppTextFormField(
+                  controller: descriptionController!,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Description is required';
+                    }
+                    return null;
+                  },
+                  label: 'Description',
+                  hint: 'Product Description',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: AppTextFormField(
+                        controller: priceController!,
+                        textInputType: TextInputType.number,
+                        formatters: [FilteringTextInputFormatter.digitsOnly],
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Price is required';
+                          }
+                          return null;
+                        },
+                        label: 'Price',
+                        hint: '99.0',
                       ),
-                      const SizedBox(
-                        width: 20,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: AppTextFormField(
+                        textInputType: TextInputType.number,
+                        formatters: [FilteringTextInputFormatter.digitsOnly],
+                        controller: stockController!,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Stock is required';
+                          }
+                          return null;
+                        },
+                        label: 'Stock',
+                        hint: '5',
                       ),
-                      Expanded(
-                        child: AppTextFormField(
-                          textInputType: TextInputType.number,
-                          formatters: [FilteringTextInputFormatter.digitsOnly],
-                          controller: stockController!,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Stock is required';
-                            }
-                            return null;
-                          },
-                          label: 'Stock',
-                          hint: '5',
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AppTextFormField(
-                    controller: imageController!,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Image Url is required';
-                      }
-                      return null;
-                    },
-                    label: 'Image Url',
-                    hint: 'https://www.image_url.com/',
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Switch(
-                          value: isAvaliable,
-                          onChanged: (value) {
-                            setState(() {
-                              isAvaliable = value;
-                            });
-                          }),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text('Is Avaliable')
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CategoriesDropDown(
-                    selectedValue: selectedCategoryId,
-                    onChanged: (categoryId) {
-                      setState(() {
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                AppTextFormField(
+                  controller: imageController!,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Image Url is required';
+                    }
+                    return null;
+                  },
+                  label: 'Image Url',
+                  hint: 'https://www.image_url.com/',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Switch(
+                        value: isAvailable,
+                        onChanged: (value) {
+                          setState(() {
+                            isAvailable = value;
+                          });
+                        }),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const Text('Is Avaliable')
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CategoriesDropDown(
+                  selectedValue: selectedCategoryId,
+                  onChanged: (categoryId) {
+                    setState(
+                      () {
                         selectedCategoryId = categoryId;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AppElevatedButton(
-                    label: 'Submit',
-                    onPressed: () async {
-                      await onSubmit();
-                    },
-                  ),
-                ],
-              ),
-            )),
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                AppElevatedButton(
+                  label: 'Submit',
+                  onPressed: () async {
+                    await onSubmit();
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -195,7 +199,6 @@ class _ProductOpsPageState extends State<ProductOpsPage> {
       if (formKey.currentState!.validate()) {
         var sqlHelper = GetIt.I.get<SqlHelper>();
         if (widget.product != null) {
-          // update logic
           await sqlHelper.db!.update(
               'products',
               {
@@ -204,7 +207,7 @@ class _ProductOpsPageState extends State<ProductOpsPage> {
                 'price': priceController?.text,
                 'stock': stockController?.text,
                 'image': imageController?.text,
-                'isAvaliable': isAvaliable,
+                'isAvailable': isAvailable,
                 'categoryId': selectedCategoryId,
               },
               where: 'id =?',
@@ -216,20 +219,26 @@ class _ProductOpsPageState extends State<ProductOpsPage> {
             'price': priceController?.text,
             'stock': stockController?.text,
             'image': imageController?.text,
-            'isAvaliable': isAvaliable,
+            'isAvailable': isAvailable,
             'categoryId': selectedCategoryId,
           });
         }
 
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
             backgroundColor: Colors.green,
-            content: Text('Category Saved Successfully')));
+            content: Text('Product Saved Successfully'),
+          ),
+        );
         Navigator.pop(context, true);
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           backgroundColor: Colors.red,
-          content: Text('Error In Create Category : $e')));
+          content: Text('Error In Creating Product : $e'),
+        ),
+      );
     }
   }
 }
